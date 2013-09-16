@@ -1,0 +1,34 @@
+. /etc/rc.conf
+
+echo
+echo
+echo "         Morpheus"
+echo
+echo
+
+echo Mounting filesystems.
+mkdir -p /dev/pts
+mkdir -p /sys
+mkdir -p /proc
+mount -n -t proc proc /proc
+mount -n -t sysfs sysfs /sys
+mount -n -t devpts devpts /dev/pts
+
+echo Populating /dev nodes.
+smdev -s
+
+echo /bin/smdev > /proc/sys/kernel/hotplug
+
+hostname $HOSTNAME
+
+sh /etc/netstart
+
+if [ -x /etc/dropbearkeys ]; then
+	/etc/dropbearkeys
+fi
+chmod 644 /etc/dropbearkeys
+
+for s in $SVC; do
+	echo Starting $s
+	/etc/rc.d/$s start
+done

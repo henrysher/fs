@@ -21,6 +21,7 @@ echo /bin/smdev > /proc/sys/kernel/hotplug
 
 hostname $HOSTNAME
 
+echo Starting network.
 sh /etc/netstart
 
 if [ -x /etc/dropbearkeys ]; then

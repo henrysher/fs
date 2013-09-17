@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. /etc/rc.conf
+
+case "$1" in
+	start)
+		ifconfig $INTERFACE up && sdhcp $INTERFACE
+		;;
+	stop)
+		pkill sdhcp
+		ifconfig $INTERFACE down
+		;;
+	restart)
+		pkill sdhcp
+		ifconfig $INTERFACE down
+		ifconfig $INTERFACE up && sdhcp $INTERFACE
+		;;
+	*)
+		echo "usage: $0 [start|stop|restart]"
+esac
+exit 0

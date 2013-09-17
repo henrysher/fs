@@ -1,5 +1,0 @@
-#!/bin/sh
-
-ifconfig eth0 down
-pkill sdhcp
-ifconfig eth0 up && sdhcp eth0

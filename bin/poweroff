@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. /etc/rc.conf
+
+echo $SVC | sed 's/ /\n/g' | tac | while read s; do
+	echo Stopping $s
+	/etc/rc.d/$s stop
+done
+
+echo Remounting root as read-only
+mount -o remount, ro /
+echo Syncing...
+sync
+halt

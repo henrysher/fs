@@ -11,4 +11,5 @@ echo Remounting root as read-only
 mount -o remount, ro /
 echo Syncing...
 sync
+sync
 halt -r

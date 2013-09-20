@@ -14,7 +14,7 @@ mount -n -t proc proc /proc
 mount -n -t sysfs sysfs /sys
 mount -n -t devpts devpts /dev/pts
 
-echo Populating /dev
+echo Running smdev
 smdev -s
 
 echo /bin/smdev > /proc/sys/kernel/hotplug

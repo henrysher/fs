@@ -7,7 +7,7 @@ echo
 echo
 
 echo Mounting filesystems
-mkdir -p /dev/pts
+mkdir -p /dev/pts /dev/shm
 mkdir -p /sys
 mkdir -p /proc
 mount -n -t proc proc /proc

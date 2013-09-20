@@ -21,6 +21,28 @@ echo /bin/smdev > /proc/sys/kernel/hotplug
 
 hostname $HOSTNAME
 
+HWCLOCK_PARAMS="-s"
+case $HARDWARECLOCK in
+	"")
+		;;
+	UTC)
+		HWCLOCK_PARAMS="${HWCLOCK_PARAMS} -u"
+		;;
+	localtime)
+		HWCLOCK_PARAMS="${HWCLOCK_PARAMS} -l"
+		;;
+	*)
+		HWCLOCK_PARAMS=""
+		;;
+esac
+
+if [ -n "$HWCLOCK_PARAMS" ]; then
+	echo Setting hwclock
+	[ -n "$TIMEZONE" ] && export TZ="$TIMEZONE"
+	hwclock $HWCLOCK_PARAMS
+	unset TZ
+fi
+
 if [ -x /etc/dropbearkeys ]; then
 	/etc/dropbearkeys
 fi

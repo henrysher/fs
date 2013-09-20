@@ -17,8 +17,10 @@ mount -n -t devpts devpts /dev/pts
 echo Running smdev
 smdev -s
 
+echo Setting smdev as the kernel hotplug
 echo /bin/smdev > /proc/sys/kernel/hotplug
 
+echo "Setting hostname to $HOSTNAME"
 hostname $HOSTNAME
 
 HWCLOCK_PARAMS="-s"
@@ -43,6 +45,10 @@ if [ -n "$HWCLOCK_PARAMS" ]; then
 	unset TZ
 fi
 
+echo Storing dmesg output to /var/log/dmesg.log
+dmesg > /var/log/dmesg.log
+
+echo Generating dropbear keys
 if [ -x /etc/dropbearkeys ]; then
 	/etc/dropbearkeys
 fi

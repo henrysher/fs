@@ -10,7 +10,7 @@ chmod 644 /etc/dropbearkeys
 
 for s in $SVC; do
 	echo Starting $s
-	/etc/rc.d/$s start
+	/etc/rc.d/$s -s
 done
 
 echo Running rc.local

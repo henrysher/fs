@@ -3,17 +3,17 @@
 . /etc/rc.conf
 
 case "$1" in
-	start)
+	-s)
 		dropbear -B
 		;;
-	stop)
+	-k)
 		pkill dropbear
 		;;
-	restart)
+	-r)
 		pkill dropbear
 		dropbear -B
 		;;
 	*)
-		echo "usage: $0 [start|stop|restart]"
+		echo "usage: $0 [-s|-k|-r]"
 esac
 exit 0

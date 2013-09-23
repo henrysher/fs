@@ -3,19 +3,19 @@
 . /etc/rc.conf
 
 case "$1" in
-	start)
+	-s)
 		ifconfig $INTERFACE up && sdhcp $INTERFACE
 		;;
-	stop)
+	-k)
 		pkill sdhcp
 		ifconfig $INTERFACE down
 		;;
-	restart)
+	-r)
 		pkill sdhcp
 		ifconfig $INTERFACE down
 		ifconfig $INTERFACE up && sdhcp $INTERFACE
 		;;
 	*)
-		echo "usage: $0 [start|stop|restart]"
+		echo "usage: $0 [-s|-k|-r]"
 esac
 exit 0

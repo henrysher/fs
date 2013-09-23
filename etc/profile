@@ -1,0 +1,6 @@
+umask 022
+
+PATH=/bin:/sbin
+MANPATH=/share/man
+
+export PATH MANPATH

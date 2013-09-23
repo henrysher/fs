@@ -51,3 +51,5 @@ fi
 
 echo Storing dmesg output to /var/log/dmesg.log
 dmesg > /var/log/dmesg.log
+
+/etc/rc.multi

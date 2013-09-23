@@ -49,6 +49,10 @@ if [ -n "$HWCLOCK_PARAMS" ]; then
 	unset TZ
 fi
 
+echo Setting random seed
+[ -f /etc/random-seed ] && cat /etc/random-seed >/dev/urandom
+dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
+
 echo Storing dmesg output to /var/log/dmesg.log
 dmesg > /var/log/dmesg.log
 

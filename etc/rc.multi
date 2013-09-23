@@ -14,4 +14,4 @@ for s in $SVC; do
 done
 
 echo Running rc.local
-[ -x /etc/rc.local ] && /bin/rc.local
+[ -x /etc/rc.local ] && /etc/rc.local

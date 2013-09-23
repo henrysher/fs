@@ -2,7 +2,7 @@
 
 echo
 echo
-echo "         Morpheus"
+echo "         Morpheus booting"
 echo
 echo
 
@@ -44,6 +44,8 @@ if [ -n "$HWCLOCK_PARAMS" ]; then
 	hwclock $HWCLOCK_PARAMS
 	unset TZ
 fi
+
+ifconfig lo up
 
 echo Storing dmesg output to /var/log/dmesg.log
 dmesg > /var/log/dmesg.log

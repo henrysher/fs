@@ -10,4 +10,4 @@ tty4::respawn:/bin/getty 38400 tty4 linux
 
 ::ctrlaltdel:/bin/busybox reboot -d 3
 ::restart:/bin/busybox init
-::shutdown:/bin/rc.shutdown
+::shutdown:/etc/rc.shutdown

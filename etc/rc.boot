@@ -16,6 +16,8 @@ mount -n -t proc proc /proc
 mount -n -t sysfs sysfs /sys
 mount -n -t devpts devpts /dev/pts
 
+grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
+
 echo Running smdev
 smdev -s
 

@@ -1,7 +1,7 @@
 # Note that busybox uses a non-standard inittab.
 
 ::sysinit:/etc/rc.boot
-::once:/bin/rc.multi
+::once:/etc/rc.multi
 
 tty1::respawn:/bin/getty 38400 tty1 linux
 tty2::respawn:/bin/getty 38400 tty2 linux

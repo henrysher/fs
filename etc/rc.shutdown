@@ -1,0 +1,26 @@
+#!/bin/sh
+PATH=/bin
+
+. /etc/rc.conf
+
+echo shutting down
+
+hwclock -u -w
+
+echo $SVC | sed 's/ /\n/g' | tac | while read s; do
+	echo Stopping $s
+	/etc/rc.d/$s stop
+done
+
+killall5 -15
+sleep 5
+killall5 -9
+
+dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
+
+echo Mounting root read-only
+mount -o remount,ro /
+
+sync
+sleep 3
+wait

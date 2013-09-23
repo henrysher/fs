@@ -1,3 +1,5 @@
+#!/bin/sh
+
 . /etc/rc.conf
 
 echo
@@ -23,6 +25,8 @@ echo /bin/smdev > /proc/sys/kernel/hotplug
 echo "Setting hostname to $HOSTNAME"
 hostname $HOSTNAME
 
+ifconfig lo up
+
 HWCLOCK_PARAMS="-s"
 case $HARDWARECLOCK in
 	"")
@@ -45,18 +49,5 @@ if [ -n "$HWCLOCK_PARAMS" ]; then
 	unset TZ
 fi
 
-ifconfig lo up
-
 echo Storing dmesg output to /var/log/dmesg.log
 dmesg > /var/log/dmesg.log
-
-echo Generating dropbear keys
-if [ -x /etc/dropbearkeys ]; then
-	/etc/dropbearkeys
-fi
-chmod 644 /etc/dropbearkeys
-
-for s in $SVC; do
-	echo Starting $s
-	/etc/rc.d/$s start
-done

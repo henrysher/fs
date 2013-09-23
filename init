@@ -1,9 +1,0 @@
-#!/bin/sh
-
-export PATH=/bin:/sbin
-
-. /etc/rc
-
-while :; do 
-	/bin/getty 38400 tty1 linux
-done

@@ -27,6 +27,7 @@ echo /bin/smdev > /proc/sys/kernel/hotplug
 echo "Setting hostname to $HOSTNAME"
 hostname $HOSTNAME
 
+echo Bringing up the lo interface
 ifconfig lo up
 
 HWCLOCK_PARAMS="-s"
@@ -57,4 +58,5 @@ dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
 
 dmesg > /var/log/dmesg.log
 
+echo Running rc.multi
 /etc/rc.multi

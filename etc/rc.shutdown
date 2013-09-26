@@ -26,3 +26,5 @@ mount -o remount,ro /
 sync
 sleep 3
 wait
+
+echo bye

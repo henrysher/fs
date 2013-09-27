@@ -2,8 +2,8 @@
 
 . /etc/rc.conf
 
-echo Generating dropbear keys
 if [ -x /etc/dropbearkeys ]; then
+	echo Generating dropbear keys
 	/etc/dropbearkeys
 fi
 chmod 644 /etc/dropbearkeys

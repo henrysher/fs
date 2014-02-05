@@ -10,10 +10,10 @@ chmod 644 /etc/dropbearkeys
 
 for s in $SVC; do
 	echo Starting $s
-	/etc/rc.d/$s -s
+	/bin/rc.d/$s -s
 done
 
 echo Running rc.local
-[ -x /etc/rc.local ] && /etc/rc.local
+[ -x /bin/rc.local ] && /bin/rc.local
 
 while :; do getty 38400 tty1 linux; done

@@ -10,7 +10,7 @@ hwclock -u -w
 
 echo $SVC | sed 's/ /\n/g' | tac | while read s; do
 	echo Stopping $s
-	/etc/rc.d/$s -k
+	/bin/rc.d/$s -k
 done
 
 killall5 -15

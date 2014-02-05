@@ -59,4 +59,4 @@ dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
 dmesg > /var/log/dmesg.log
 
 echo Running rc.multi
-/etc/rc.multi
+/bin/rc.multi

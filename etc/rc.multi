@@ -15,3 +15,5 @@ done
 
 echo Running rc.local
 [ -x /etc/rc.local ] && /etc/rc.local
+
+while :; do getty 38400 tty1 linux; done

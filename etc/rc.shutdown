@@ -28,3 +28,9 @@ sleep 3
 wait
 
 echo bye
+
+if test "$1" = "reboot"; then
+	halt -r
+else
+	halt -p
+fi

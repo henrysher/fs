@@ -4,6 +4,15 @@ PATH=/bin
 
 . /etc/rc.conf
 
+case "$1" in
+reboot|poweroff)
+	;;
+*)
+	echo "Invalid action '$1' for rc.shutdown" 1>&2
+	exit 1
+	;;
+esac
+
 echo Shutting down
 
 hwclock -u -w
@@ -29,8 +38,11 @@ wait
 
 echo bye
 
-if test "$1" = "reboot"; then
+case "$1" in
+reboot)
 	halt -r
-else
+	;;
+poweroff)
 	halt -p
-fi
+	;;
+esac

@@ -8,6 +8,9 @@ echo "         Morpheus booting"
 echo
 echo
 
+# Soft reboot on ctrl-alt-del
+ctrlaltdel -s
+
 echo Mounting filesystems
 mkdir -p /dev/pts /dev/shm
 mkdir -p /sys

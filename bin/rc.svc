@@ -16,7 +16,4 @@ done
 echo Running rc.local
 [ -x /bin/rc.local ] && /bin/rc.local
 
-# Force sinit to create /var/run/sinit.fifo
-kill -SIGHUP 1
-
 while :; do getty 38400 tty1 linux; done &

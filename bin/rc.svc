@@ -16,4 +16,4 @@ done
 echo Running rc.local
 [ -x /bin/rc.local ] && /bin/rc.local
 
-while :; do echo; getty /dev/tty1 linux; done &
+exec sh -c 'while :; do echo; getty /dev/tty1 linux; done'

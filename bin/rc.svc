@@ -2,16 +2,8 @@
 
 . /etc/rc.conf
 
-if [ -x /etc/dropbearkeys ]; then
-	echo Generating dropbear keys
-	/etc/dropbearkeys
-fi
-chmod 644 /etc/dropbearkeys
-
-for s in $SVC; do
-	echo Starting $s
-	/bin/rc.d/$s -s
-done
+svc -c
+svc -s
 
 echo Running rc.local
 [ -x /bin/rc.local ] && /bin/rc.local

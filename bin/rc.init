@@ -11,13 +11,12 @@ echo
 # Soft reboot on ctrl-alt-del
 ctrlaltdel -s
 
-echo Mounting filesystems
-mkdir -p /dev/pts /dev/shm
-mkdir -p /sys
-mkdir -p /proc
 mount -n -t proc proc /proc
 mount -n -t sysfs sysfs /sys
 mount -n -t devpts devpts /dev/pts
+
+echo Remounting root as read-write
+mount -o remount,rw /
 
 grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
 

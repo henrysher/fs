@@ -26,7 +26,7 @@ killall5 -9
 echo Storing random seed
 dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
 
-echo Mounting root read-only
+echo Remounting root as read-only
 mount -o remount,ro /
 
 sync

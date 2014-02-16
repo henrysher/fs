@@ -1,6 +1,6 @@
 umask 022
 
-PATH=/bin:/sbin
+PATH=/bin
 MANPATH=/share/man
 
 export PATH MANPATH

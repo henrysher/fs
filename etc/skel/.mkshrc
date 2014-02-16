@@ -1,4 +1,4 @@
-PATH=/bin:/sbin
+PATH=/bin
 TERM=linux
 PS1='$(hostname)# '
 export PATH TERM PS1

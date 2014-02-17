@@ -60,5 +60,7 @@ dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
 
 dmesg > /var/log/dmesg.log
 
-echo Running rc.svc
-/bin/rc.svc
+if [ -x /bin/rc.svc ]; then
+	echo Running rc.svc
+	/bin/rc.svc
+fi

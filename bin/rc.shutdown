@@ -40,7 +40,7 @@ fi
 svc -k
 
 killall5 -15
-sleep 5
+sleep 3
 killall5 -9
 
 echo Storing random seed

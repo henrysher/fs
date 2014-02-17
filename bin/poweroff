@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/bin/rc.shutdown poweroff

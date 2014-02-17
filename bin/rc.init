@@ -64,3 +64,5 @@ if [ -x /bin/rc.svc ]; then
 	echo Running rc.svc
 	/bin/rc.svc
 fi
+
+exec sh -c 'while :; do echo; getty /dev/tty1 linux; done'

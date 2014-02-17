@@ -9,5 +9,3 @@ if [ -x /bin/rc.local ]; then
 	echo Running rc.local
 	/bin/rc.local
 fi
-
-exec sh -c 'while :; do echo; getty /dev/tty1 linux; done'

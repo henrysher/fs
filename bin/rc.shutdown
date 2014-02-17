@@ -1,6 +1,7 @@
 #!/bin/sh
 
 PATH=/bin
+export PATH
 
 . /etc/rc.conf
 

@@ -3,6 +3,8 @@
 PATH=/bin
 export PATH
 
+umask 022
+
 . /etc/rc.conf
 
 case "$1" in

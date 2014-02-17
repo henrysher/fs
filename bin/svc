@@ -21,6 +21,17 @@
 #LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 #FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 #DEALINGS IN THE SOFTWARE.
+#
+#	% svc -a	# list all links in /bin/svc.d/run (all activated services)
+#	% svc -a ser	# activate service to be run on startup
+#	% svc -c	# create the basic directories of svc (configure)
+#	% svc -d ser	# deactivate service
+#	% svc -k	# kill all services linked to /bin/svc.d/run
+#	% svc -k ser	# kill service
+#	% svc -s	# run all services linked to /bin/svc.d/run
+#	% svc -s ser	# run service
+#	% svc -l	# list all services in /bin/svc.d/avail
+#	% svc -r ser	# restart service
 
 BASEDIR="/bin/svc.d"
 BASENAME="$(basename $0)"

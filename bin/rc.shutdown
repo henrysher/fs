@@ -15,7 +15,27 @@ esac
 
 echo Shutting down
 
-hwclock -u -w
+HWCLOCK_PARAMS="-w"
+case $HARDWARECLOCK in
+	"")
+		;;
+	UTC)
+		HWCLOCK_PARAMS="-u $HWCLOCK_PARAMS"
+		;;
+	localtime)
+		HWCLOCK_PARAMS="-l $HWCLOCK_PARAMS"
+		;;
+	*)
+		HWCLOCK_PARAMS=""
+		;;
+esac
+
+if [ -n "$HWCLOCK_PARAMS" ]; then
+	echo Saving system clock
+	[ -n "$TIMEZONE" ] && export TZ="$TIMEZONE"
+	hwclock $HWCLOCK_PARAMS
+	unset TZ
+fi
 
 svc -k
 

@@ -1,3 +1,3 @@
-xsetroot -solid white &
+xsetroot -solid black &
 uuterm-x11 &
-exec aewm
+exec dwm

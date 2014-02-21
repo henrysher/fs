@@ -70,4 +70,8 @@ if [ -x /bin/rc.svc ]; then
 	/bin/rc.svc
 fi
 
-exec sh -c 'while :; do echo; getty /dev/tty1 linux; done'
+echo
+sh -c 'respawn getty /dev/tty1 linux' &
+sh -c 'respawn getty /dev/tty2 linux' &
+sh -c 'respawn getty /dev/tty3 linux' &
+sh -c 'respawn getty /dev/tty4 linux' &

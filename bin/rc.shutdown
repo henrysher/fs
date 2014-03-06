@@ -42,9 +42,9 @@ fi
 
 svc -k
 
-killall5 -15
+killall5 -s TERM
 sleep 3
-killall5 -9
+killall5 -s KILL
 
 echo Storing random seed
 dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null

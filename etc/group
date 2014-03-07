@@ -8,3 +8,4 @@ disk:x:6:root
 cdrom:x:7:root
 video:x:8:root
 audio:x:9:root
+nogroup:x:65534:

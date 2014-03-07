@@ -22,6 +22,14 @@ mount -n -t devtmpfs dev /dev
 mkdir -p /dev/pts
 mount -n -t devpts devpts /dev/pts
 
+echo Checking filesystems
+fsck -ATa
+if [ $? -eq 1 ]; then
+	echo Filesystem errors exist, fix manually.
+	sh
+	halt -r
+fi
+
 echo Remounting root as read-write
 mount -o remount,rw /
 

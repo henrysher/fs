@@ -16,6 +16,9 @@ reboot|poweroff)
 	;;
 esac
 
+# Set linefeed mode to avoid staircase effect
+stty onlcr
+
 echo Shutting down
 
 HWCLOCK_PARAMS="-w"

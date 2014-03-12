@@ -55,6 +55,9 @@ killall5 -s KILL
 echo Remounting root as read-only
 mount -o remount,ro /
 
+echo Unmounting filesystems
+umount -a
+
 sync
 sleep 3
 wait

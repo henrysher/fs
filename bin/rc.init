@@ -35,7 +35,7 @@ fi
 echo Remounting root as read-write
 mount -o remount,rw /
 
-cp /proc/mounts /etc/mtab
+ln -sf /proc/mounts /etc/mtab
 
 grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
 

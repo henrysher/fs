@@ -29,6 +29,9 @@ mount -o remount,ro /
 echo Running smdev
 smdev -s
 
+echo Setting smdev as the kernel hotplug
+echo /bin/smdev > /proc/sys/kernel/hotplug
+
 echo Checking filesystems
 fsck -ATa
 if [ $? -eq 1 ]; then
@@ -44,9 +47,6 @@ ln -sf /proc/mounts /etc/mtab
 
 echo Mounting filesystems
 mount -a
-
-echo Setting smdev as the kernel hotplug
-echo /bin/smdev > /proc/sys/kernel/hotplug
 
 echo "Setting hostname to $HOSTNAME"
 hostname $HOSTNAME

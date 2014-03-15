@@ -21,11 +21,13 @@ mount -n -t proc proc /proc
 grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
 
 mount -n -t sysfs sysfs /sys
-mount -n -t devtmpfs dev /dev
+mount -n -t tmpfs -o nosuid,mode=0755 dev /dev
 mkdir -p /dev/pts
 mount -n -t devpts -o gid=5,mode=620 devpts /dev/pts
-
 mount -o remount,ro /
+
+echo Running smdev
+smdev -s
 
 echo Checking filesystems
 fsck -ATa
@@ -42,9 +44,6 @@ ln -sf /proc/mounts /etc/mtab
 
 echo Mounting filesystems
 mount -a
-
-echo Running smdev
-smdev -s
 
 echo Setting smdev as the kernel hotplug
 echo /bin/smdev > /proc/sys/kernel/hotplug

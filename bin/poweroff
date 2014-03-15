@@ -1,3 +1,3 @@
 #!/bin/sh
 
-kill -SIGUSR1 1
+/bin/kill -s USR1 1

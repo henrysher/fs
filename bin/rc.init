@@ -20,7 +20,7 @@ mount -n -t proc proc /proc
 mount -n -t sysfs sysfs /sys
 mount -n -t devtmpfs dev /dev
 mkdir -p /dev/pts
-mount -n -t devpts devpts /dev/pts
+mount -n -t devpts -o gid=5,mode=620 devpts /dev/pts
 
 mount -o remount,ro /
 

@@ -17,13 +17,13 @@ echo
 ctrlaltdel -s
 
 mount -n -t proc proc /proc
-
-grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
-
 mount -n -t sysfs sysfs /sys
 mount -n -t tmpfs -o nosuid,mode=0755 dev /dev
 mkdir -p /dev/pts
 mount -n -t devpts -o gid=5,mode=0620 devpts /dev/pts
+
+grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
+
 mount -o remount,ro /
 
 echo Running smdev

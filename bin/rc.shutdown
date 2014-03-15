@@ -17,7 +17,7 @@ reboot|poweroff)
 esac
 
 # Set linefeed mode to avoid staircase effect
-stty onlcr
+echo; stty onlcr
 
 echo Shutting down
 

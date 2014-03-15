@@ -37,6 +37,9 @@ mount -o remount,rw /
 
 ln -sf /proc/mounts /etc/mtab
 
+echo Mounting filesystems
+mount -a
+
 grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
 
 echo Running smdev

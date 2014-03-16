@@ -80,7 +80,14 @@ echo Setting random seed
 [ -f /etc/random-seed ] && cat /etc/random-seed >/dev/urandom
 dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
 
-dmesg > /var/log/dmesg.log
+echo Storing dmesg output to /var/log/dmesg.log
+env dmesg > /var/log/dmesg.log
+if [ -e /proc/sys/kernel/dmesg_restrict ] && [ $(cat /proc/sys/kernel/dmesg_restrict) = "1" ];
+then
+	chmod 0600 /var/log/dmesg.log
+else
+	chmod 0644 /var/log/dmesg.log
+fi
 
 if [ -x /bin/rc.svc ]; then
 	echo Running rc.svc

@@ -81,7 +81,7 @@ echo Setting random seed
 dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
 
 echo Storing dmesg output to /var/log/dmesg.log
-env dmesg > /var/log/dmesg.log
+dmesg > /var/log/dmesg.log
 if [ -e /proc/sys/kernel/dmesg_restrict ] && [ $(cat /proc/sys/kernel/dmesg_restrict) = "1" ];
 then
 	chmod 0600 /var/log/dmesg.log

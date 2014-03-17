@@ -89,6 +89,11 @@ else
 	chmod 0644 /var/log/dmesg.log
 fi
 
+if [ -x /bin/rc.modules ]; then
+	echo Running rc.modules
+	/bin/rc.modules
+fi
+
 if [ -x /bin/rc.svc ]; then
 	echo Running rc.svc
 	/bin/rc.svc

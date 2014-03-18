@@ -46,8 +46,6 @@ fi
 echo Remounting root as read-write
 mount -o remount,rw /
 
-ln -sf /proc/mounts /etc/mtab
-
 echo Mounting filesystems
 mount -a
 

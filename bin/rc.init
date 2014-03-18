@@ -16,8 +16,11 @@ echo
 # Soft reboot on ctrl-alt-del
 ctrlaltdel -s
 
-mount -n -t proc proc /proc
-mount -n -t sysfs sysfs /sys
+mkdir -p /proc
+mkdir -p /sys
+mount -n -t proc -o nosuid,noexec,nodev proc /proc
+mount -n -t sysfs -o nosuid,noexec,nodev sysfs /sys
+
 mount -n -t tmpfs -o nosuid,mode=0755 dev /dev
 mkdir -p /dev/pts
 mount -n -t devpts -o gid=5,mode=0620 devpts /dev/pts

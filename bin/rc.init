@@ -1,8 +1,5 @@
 #!/bin/sh
 
-PATH=/bin
-export PATH
-
 umask 022
 
 . /etc/rc.conf
@@ -14,46 +11,55 @@ echo
 echo
 
 # Soft reboot on ctrl-alt-del
-ctrlaltdel -s
+/bin/ctrlaltdel -s
 
-mkdir -p /proc
-mkdir -p /sys
-mount -n -t proc -o nosuid,noexec,nodev proc /proc
-mount -n -t sysfs -o nosuid,noexec,nodev sysfs /sys
+/bin/mount -n -t proc -o nosuid,noexec,nodev proc /proc
+/bin/mount -n -t sysfs -o nosuid,noexec,nodev sysfs /sys
 
-mount -n -t tmpfs -o nosuid,mode=0755 dev /dev
-mkdir -p /dev/pts
-mount -n -t devpts -o gid=5,mode=0620 devpts /dev/pts
+/bin/mount -n -t tmpfs -o nosuid,mode=0755 dev /dev
+/bin/mkdir -p /dev/pts
+/bin/mount -n -t devpts -o gid=5,mode=0620 devpts /dev/pts
 
-grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
+/bin/grep -q " verbose" /proc/cmdline && dmesg -n 8 || dmesg -n 3
 
-mount -o remount,ro /
+/bin/mount -o remount,ro /
 
 echo Running smdev
-smdev -s
+/bin/smdev -s
 
 echo Setting smdev as the kernel hotplug
 echo /bin/smdev > /proc/sys/kernel/hotplug
 
+# HACK!
+cd /dev
+/bin/ln -sf /proc/self/fd/0 stdin
+/bin/ln -sf /proc/self/fd/1 stdout
+/bin/ln -sf /proc/self/fd/2 stderr
+/bin/ln -sf /proc/self/fd fd
+cd - 1>/dev/null
+
 echo Checking filesystems
-fsck -ATa
+/bin/fsck -ATa
 if [ $? -eq 1 ]; then
 	echo Filesystem errors exist, fix manually.
-	sh
-	halt -r
+	/bin/sh
+	/bin/halt -r
 fi
 
 echo Remounting root as read-write
-mount -o remount,rw /
+/bin/mount -o remount,rw /
 
 echo Mounting filesystems
-mount -a
+/bin/mount -a
+
+ln -sf /proc/mounts /etc/mtab
 
 echo "Setting hostname to $HOSTNAME"
-hostname $HOSTNAME
+/bin/hostname $HOSTNAME
 
 echo Bringing up the lo interface
-ifconfig lo up
+/bin/ip addr add 127.0.0.1/8 dev lo broadcast + scope host
+/bin/ip link set lo up
 
 HWCLOCK_PARAMS="-s"
 case $HARDWARECLOCK in
@@ -73,22 +79,25 @@ esac
 if [ -n "$HWCLOCK_PARAMS" ]; then
 	echo Setting hwclock
 	[ -n "$TIMEZONE" ] && export TZ="$TIMEZONE"
-	hwclock $HWCLOCK_PARAMS
+	/bin/hwclock $HWCLOCK_PARAMS /dev/rtc0
 	unset TZ
 fi
 
 echo Setting random seed
-[ -f /etc/random-seed ] && cat /etc/random-seed >/dev/urandom
-dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
+[ -f /etc/random-seed ] && /bin/cat /etc/random-seed >/dev/urandom
+/bin/dd if=/dev/urandom of=/etc/random-seed count=1 bs=512 2>/dev/null
 
 echo Storing dmesg output to /var/log/dmesg.log
-dmesg > /var/log/dmesg.log
-if [ -e /proc/sys/kernel/dmesg_restrict ] && [ $(cat /proc/sys/kernel/dmesg_restrict) = "1" ];
+/bin/dmesg > /var/log/dmesg.log
+if [ -e /proc/sys/kernel/dmesg_restrict ] && [ $(/bin/cat /proc/sys/kernel/dmesg_restrict) = "1" ];
 then
-	chmod 0600 /var/log/dmesg.log
+	/bin/chmod 0600 /var/log/dmesg.log
 else
-	chmod 0644 /var/log/dmesg.log
+	/bin/chmod 0644 /var/log/dmesg.log
 fi
+
+echo Enabling core dumps
+ulimit -c unlimited
 
 if [ -x /bin/rc.modules ]; then
 	echo Running rc.modules
@@ -100,8 +109,15 @@ if [ -x /bin/rc.svc ]; then
 	/bin/rc.svc
 fi
 
+if [ -x /bin/rc.local ]; then
+	echo Running rc.local
+	/bin/rc.local
+fi
+
+: > /var/run/utmp
+
 echo
-sh -c 'respawn getty /dev/tty1 linux' &>/dev/null &
-sh -c 'respawn getty /dev/tty2 linux' &>/dev/null &
-sh -c 'respawn getty /dev/tty3 linux' &>/dev/null &
-sh -c 'respawn getty /dev/tty4 linux' &>/dev/null &
+/bin/sh -c '/bin/respawn /bin/getty /dev/tty1 linux' &>/dev/null &
+/bin/sh -c '/bin/respawn /bin/getty /dev/tty2 linux' &>/dev/null &
+/bin/sh -c '/bin/respawn /bin/getty /dev/tty3 linux' &>/dev/null &
+/bin/sh -c '/bin/respawn /bin/getty /dev/tty4 linux' &>/dev/null &
